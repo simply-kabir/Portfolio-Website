@@ -8,7 +8,7 @@ import { SkillInformation } from "./SkillInformation";
 import { SkillsTypography } from "./SkillsTypography";
 
 export function SkillsSection() {
-  const entrance = useScrollEntrance({ amount: 0.5 });
+  const entrance = useScrollEntrance({ amount: 0.3 });
   const [activeSkillId, setActiveSkillId] = useState<string>(skills[0].id);
 
   const handleActiveSkillChange = useCallback((id: string) => {

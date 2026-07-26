@@ -13,15 +13,19 @@ interface UseScrollEntranceOptions {
  * into view, then locks forever — scroll position is never read again
  * after that, and this never re-triggers even if the user scrolls back up.
  */
-export function useScrollEntrance({ amount = 0.5 }: UseScrollEntranceOptions = {}) {
+export function useScrollEntrance({ amount = 0.3 }: UseScrollEntranceOptions = {}) {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { amount, once: true });
+  const isInView = useInView(ref, { amount, once: false });
   const controls = useAnimation();
   const [entranceComplete, setEntranceComplete] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
-    controls.start("locked");
+    if (isInView) {
+      controls.start("locked");
+    } else {
+      controls.start("hidden");
+      setEntranceComplete(false);
+    }
   }, [isInView, controls]);
 
   return {

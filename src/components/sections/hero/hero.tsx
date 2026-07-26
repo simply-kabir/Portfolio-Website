@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "@/components/sections/hero/herobackground";
-import HeroContent from "@/components/sections/hero/herocontent";
 import About from "@/components/sections/about";
 import ScreenOverlay from "@/components/ui/screen-overlay";
 import { useDollyProgress } from "@/hooks/use-dolly-progress";
@@ -16,22 +15,30 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useDollyProgress(sectionRef);
 
+  // Cross-fade opacity lerps smoothly between 0.55 and 0.75
   const aboutOpacity = Math.min(Math.max((progress - 0.55) / 0.20, 0), 1);
 
   return (
-    <section ref={sectionRef} id="hero" className="relative h-[165vh] w-full">
-      {/* Anchor for the nav's "About" link — lands near the end of the pin range */}
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative w-full h-[165vh] lg:h-[165vh]"
+    >
+      {/* Anchor for nav's "About" link */}
       <div id="about" className="absolute left-0 w-full" style={{ top: "115vh" }} />
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      {/* Viewport-Pinned Container on Desktop, Fluid Auto-Expanding on Mobile */}
+      <div className="sticky top-0 min-h-[100dvh] lg:h-screen w-full overflow-visible lg:overflow-hidden">
+        {/* 3D Scene Background & Workstation Canvas */}
         <HeroBackground progress={progress} />
 
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto">
           <SceneCanvas progress={progress} />
         </div>
 
+        {/* About Section Layer — Unconstrained Fluid Height on Mobile, Absolute Pinned Overlay on Desktop */}
         <div
-          className="absolute inset-0 z-20 transition-opacity duration-75 ease-out"
+          className="relative lg:absolute lg:inset-0 z-20 w-full h-auto lg:h-full overflow-visible lg:overflow-hidden transition-opacity duration-150 ease-out"
           style={{
             opacity: aboutOpacity,
             pointerEvents: aboutOpacity > 0.5 ? "auto" : "none",

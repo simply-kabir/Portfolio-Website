@@ -11,12 +11,11 @@ export default function SceneCanvas({ progress = 0 }: { progress?: number }) {
   // in both scroll directions (down to About, up to Monitor).
   const opacity = progress < 0.50 ? 1 : Math.max(0, 1 - (progress - 0.50) / 0.20);
 
-  if (opacity === 0) return null;
-
   return (
     <div
       style={{
         opacity,
+        visibility: opacity === 0 ? "hidden" : "visible",
         pointerEvents: opacity === 0 ? "none" : "auto",
         transition: "opacity 0.05s linear",
         width: "100%",
@@ -24,6 +23,7 @@ export default function SceneCanvas({ progress = 0 }: { progress?: number }) {
       }}
     >
       <Canvas
+        frameloop={opacity === 0 ? "demand" : "always"}
         dpr={[1, 2]}
         shadows ="variance"
         camera={{ position: [0, 1.3, 6.1], fov: 33, manual: true }}

@@ -34,6 +34,7 @@ export default function CameraRig({ progress }: { progress: number }) {
   }, [camera]);
 
   useFrame(() => {
+    if (progress > 0.72) return;
     if (!(camera instanceof ThreePerspectiveCamera)) return;
 
     // Dynamically retrieve monitor display mesh from 3D scene

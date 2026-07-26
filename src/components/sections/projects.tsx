@@ -17,6 +17,16 @@ export default function Projects() {
   const [hoveringTitle, setHoveringTitle] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Window dimensions state for hydration-safe layout math
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const currentProject: ProjectItem = PROJECTS_DATA[currentIndex];
   const total = PROJECTS_DATA.length;
 
@@ -143,7 +153,7 @@ export default function Projects() {
             exit={{ opacity: 0, scale: 0.85, y: 10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             style={{
-              left: Math.min(mousePos.x + 20, typeof window !== "undefined" ? window.innerWidth - 260 : 300),
+              left: Math.min(mousePos.x + 20, windowWidth > 0 ? windowWidth - 260 : 300),
               top: Math.max(mousePos.y - 150, 20),
             }}
             className="fixed z-50 pointer-events-none w-52 h-32 sm:w-64 sm:h-40 rounded-xl overflow-hidden bg-[#0e0e12]/95 backdrop-blur-md border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col p-1.5"

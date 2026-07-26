@@ -1,16 +1,12 @@
-import Container from "@/components/ui/container";
-import Section from "@/components/layout/section";
-import Heading from "@/components/ui/heading";
+"use client";
+
+import dynamic from "next/dynamic";
+
+const SkillsSection = dynamic(
+  () => import("@/components/skills/SkillsSection").then((mod) => mod.SkillsSection),
+  { ssr: false }
+);
 
 export default function Skills() {
-  return (
-    <Section id="skills">
-      <Container>
-        <Heading
-          subtitle="Expertise"
-          title="Skills"
-        />
-      </Container>
-    </Section>
-  );
+  return <SkillsSection />;
 }

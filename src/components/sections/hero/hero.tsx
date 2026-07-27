@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "@/components/sections/hero/herobackground";
 import About from "@/components/sections/about";
@@ -14,6 +14,16 @@ const SceneCanvas = dynamic(() => import("@/components/three/scenecanvas"), {
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useDollyProgress(sectionRef);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mql.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   // Cross-fade opacity lerps smoothly between 0.55 and 0.75
   const aboutOpacity = Math.min(Math.max((progress - 0.55) / 0.20, 0), 1);
@@ -32,9 +42,11 @@ export default function Hero() {
         {/* 3D Scene Background & Workstation Canvas */}
         <HeroBackground progress={progress} />
 
-        <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto">
-          <SceneCanvas progress={progress} />
-        </div>
+        {isDesktop && (
+          <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto hidden lg:block">
+            <SceneCanvas progress={progress} />
+          </div>
+        )}
 
         {/* About Section Layer — Unconstrained Fluid Height on Mobile, Absolute Pinned Overlay on Desktop */}
         <div

@@ -203,8 +203,6 @@ export default function About({ progress }: { progress: number }) {
               src="/about/portrait.png"
               alt="Portrait of Kabir"
               fill
-              priority
-              unoptimized
               className="object-contain object-center filter contrast-[1.02] desaturate-[0.05]"
               sizes="(min-width: 1024px) 45vw, (min-width: 768px) 50vw, 85vw"
             />

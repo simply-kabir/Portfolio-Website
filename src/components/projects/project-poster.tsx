@@ -59,8 +59,6 @@ export default function ProjectPoster({
           src={project.poster}
           alt={project.title}
           fill
-          priority
-          unoptimized
           className="object-contain object-center p-2 rounded-2xl transition-transform duration-700 ease-out group-hover:scale-[1.01]"
           sizes="(min-width: 1024px) 320px, (min-width: 768px) 280px, 240px"
         />

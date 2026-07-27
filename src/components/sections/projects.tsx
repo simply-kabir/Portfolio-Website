@@ -171,10 +171,11 @@ export default function Projects() {
 
             {/* Live Deployed Landing Page Screenshot Thumbnail */}
             <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#060608]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={currentProject.previewThumbnail}
                 alt={`${currentProject.title} Deployed Landing Page Preview`}
+                fill
+                sizes="(min-width: 1024px) 400px, 300px"
                 className="w-full h-full object-cover object-top filter contrast-[1.04]"
               />
               <div
@@ -266,13 +267,11 @@ export default function Projects() {
                 window.open(currentProject.link, "_blank", "noopener,noreferrer")
               }
             >
-              {/* Raw Floating Transparent PNG Poster Image */}
+              {/* Optimized Project Poster Image */}
               <Image
                 src={currentProject.poster}
                 alt={currentProject.title}
                 fill
-                priority
-                unoptimized
                 className="object-contain object-center filter contrast-[1.03] drop-shadow-[0_24px_40px_rgba(0,0,0,0.85)]"
                 sizes="(min-width: 1024px) 440px, (min-width: 640px) 400px, 340px"
               />

@@ -74,7 +74,7 @@ export function SkillsSection() {
           />
         </div>
       ) : (
-        <div className="relative z-20 w-full px-4">
+        <div className="relative z-20 w-full">
           <SkillsBelt
             onActiveSkillChange={handleActiveSkillChange}
           />

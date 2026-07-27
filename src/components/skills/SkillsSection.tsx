@@ -1,15 +1,29 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { skills } from "@/data/skills";
 import { useScrollEntrance } from "@/hooks/useScrollEntrance";
 import { SkillsWheel } from "./SkillsWheel";
+import { SkillsBelt } from "./SkillsBelt";
 import { SkillInformation } from "./SkillInformation";
 import { SkillsTypography } from "./SkillsTypography";
+
+const XL_BREAKPOINT = 1280;
 
 export function SkillsSection() {
   const entrance = useScrollEntrance({ amount: 0.3 });
   const [activeSkillId, setActiveSkillId] = useState<string>(skills[0].id);
+  const [isWideScreen, setIsWideScreen] = useState<boolean>(false);
+
+  // Track viewport width to conditionally mount only one animation component
+  useEffect(() => {
+    const mql = window.matchMedia(`(min-width: ${XL_BREAKPOINT}px)`);
+    setIsWideScreen(mql.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsWideScreen(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   const handleActiveSkillChange = useCallback((id: string) => {
     setActiveSkillId(id);
@@ -21,7 +35,7 @@ export function SkillsSection() {
     <section
       ref={entrance.ref}
       id="skills"
-      className="relative flex h-screen w-full items-center overflow-hidden bg-[#08070A]"
+      className="relative flex min-h-screen xl:h-screen w-full flex-col xl:flex-row items-center justify-center overflow-hidden bg-[#08070A] py-16 xl:py-0"
     >
       {/* Background Large Display Typography Layer */}
       <SkillsTypography />
@@ -44,20 +58,28 @@ export function SkillsSection() {
         }}
       />
 
-      {/* Left Panel — Skill Info */}
-      <div className="relative z-20 w-full max-w-[42%] pl-12 md:pl-20 lg:pl-24">
+      {/* Info Panel — Full width on small/medium screens, 42% max-width on wide Desktop */}
+      <div className="relative z-20 w-full xl:max-w-[42%] px-6 sm:px-12 md:pl-20 xl:pl-24 mb-10 xl:mb-0">
         <SkillInformation skill={activeSkill} />
       </div>
 
-      {/* Right Panel — Skill Wheel */}
-      <div className="relative h-full flex-1 overflow-hidden">
-        <SkillsWheel
-          controls={entrance.controls}
-          entranceComplete={entrance.entranceComplete}
-          onEntranceComplete={entrance.onEntranceComplete}
-          onActiveSkillChange={handleActiveSkillChange}
-        />
-      </div>
+      {/* Only ONE animation component is mounted at a time — prevents dual callback conflicts */}
+      {isWideScreen ? (
+        <div className="relative h-full flex-1 overflow-hidden w-full">
+          <SkillsWheel
+            controls={entrance.controls}
+            entranceComplete={entrance.entranceComplete}
+            onEntranceComplete={entrance.onEntranceComplete}
+            onActiveSkillChange={handleActiveSkillChange}
+          />
+        </div>
+      ) : (
+        <div className="relative z-20 w-full px-4">
+          <SkillsBelt
+            onActiveSkillChange={handleActiveSkillChange}
+          />
+        </div>
+      )}
     </section>
   );
 }

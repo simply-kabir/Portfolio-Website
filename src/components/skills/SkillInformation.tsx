@@ -23,24 +23,19 @@ export function SkillInformation({ skill }: SkillInformationProps) {
         Foundation built <span className="text-white/40 italic font-serif font-normal">on</span>
       </h2>
 
-      {/* Active Skill Detail — Animated Swap */}
-      <div className="border-t border-white/[0.08] pt-6 min-h-[110px]">
-        <AnimatePresence mode="wait">
+      {/* Active Skill Detail — Fast GPU-Accelerated Swap */}
+      <div className="border-t border-white/[0.08] pt-6 min-h-[110px] relative overflow-hidden">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={skill.id}
-            initial={{ opacity: 0, y: 16, filter: "blur(8px)", scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-            exit={{ opacity: 0, y: -16, filter: "blur(8px)", scale: 0.98 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-start gap-4"
           >
             {/* Ambient Vertical Accent Bar */}
-            <motion.div
-              initial={{ scaleY: 0, opacity: 0 }}
-              animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="w-[2px] h-14 bg-gradient-to-b from-[#E8A33D] via-[#E8A33D]/40 to-transparent rounded-full mt-1 origin-top shrink-0"
-            />
+            <div className="w-[2px] h-14 bg-gradient-to-b from-[#E8A33D] via-[#E8A33D]/40 to-transparent rounded-full mt-1 shrink-0" />
 
             <div className="pb-1">
               {/* Category Tag */}

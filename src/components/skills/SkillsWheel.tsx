@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { skills } from "@/data/skills";
 import { useWheelGeometry } from "@/hooks/useWheelGeometry";
@@ -30,7 +30,7 @@ const entranceVariants = {
   },
 };
 
-export function SkillsWheel({
+export const SkillsWheel = memo(function SkillsWheel({
   controls,
   entranceComplete,
   onEntranceComplete,
@@ -102,4 +102,4 @@ export function SkillsWheel({
       </motion.div>
     </div>
   );
-}
+});

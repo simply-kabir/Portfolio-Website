@@ -49,11 +49,23 @@ export function SkillIcon({ skill, baseAngle, rotationOffset, radiusX, radiusY }
   );
 
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
       <motion.div className="will-change-transform" style={{ x, y, scale, opacity, filter }}>
-        <motion.div className="relative h-20 w-20 rounded-xl md:h-28 md:w-28" style={{ boxShadow }}>
-          <Image src={skill.icon} alt={skill.name} fill sizes="112px" className="object-contain" />
-        </motion.div>
+        <a
+          href={skill.docUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`Open ${skill.name} Official Documentation`}
+          aria-label={`Open ${skill.name} Official Documentation`}
+          className="block group cursor-pointer"
+        >
+          <motion.div
+            className="relative h-20 w-20 rounded-xl md:h-28 md:w-28 transition-transform duration-300 group-hover:scale-110"
+            style={{ boxShadow }}
+          >
+            <Image src={skill.icon} alt={skill.name} fill sizes="112px" className="object-contain" />
+          </motion.div>
+        </a>
       </motion.div>
     </div>
   );

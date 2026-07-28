@@ -35,7 +35,7 @@ export function SkillsSection() {
     <section
       ref={entrance.ref}
       id="skills"
-      className="relative flex min-h-screen xl:h-screen w-full flex-col xl:flex-row items-center justify-center overflow-hidden bg-[#08070A] py-16 xl:py-0"
+      className="relative flex h-auto xl:h-screen w-full flex-col xl:flex-row items-center justify-center overflow-hidden bg-[#08070A] py-10 sm:py-14 xl:py-0"
     >
       {/* Background Large Display Typography Layer */}
       <SkillsTypography />
@@ -59,7 +59,7 @@ export function SkillsSection() {
       />
 
       {/* Info Panel — Full width on small/medium screens, 42% max-width on wide Desktop */}
-      <div className="relative z-20 w-full xl:max-w-[42%] px-6 sm:px-12 md:pl-20 xl:pl-24 mb-10 xl:mb-0">
+      <div className="relative z-20 w-full xl:max-w-[42%] px-6 sm:px-12 md:pl-20 xl:pl-24 mb-6 sm:mb-8 xl:mb-0">
         <SkillInformation skill={activeSkill} />
       </div>
 

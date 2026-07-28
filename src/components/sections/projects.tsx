@@ -131,7 +131,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative flex flex-col justify-between w-full min-h-screen bg-[#060608] py-10 sm:py-16 overflow-hidden text-white transition-colors duration-1000 select-none"
+      className="relative flex flex-col justify-between w-full min-h-fit lg:min-h-screen bg-[#060608] py-10 sm:py-14 lg:py-16 overflow-hidden text-white transition-colors duration-1000 select-none"
     >
       {/* Dynamic Ambient Theme Background Glow */}
       <div

@@ -1,5 +1,5 @@
 export const NAVIGATION = [
-   {
+  {
     label: "About",
     href: "#about",
   },
@@ -8,12 +8,12 @@ export const NAVIGATION = [
     href: "#projects",
   },
   {
-    label: "Experience",
-    href: "#experience",
-  },
-  {
     label: "Skills",
     href: "#skills",
+  },
+  {
+    label: "Foundation",
+    href: "#foundation",
   },
   {
     label: "Contact",

@@ -6,8 +6,8 @@ export const SITE = {
 
 export const NAV_LINKS = [
   "Projects",
-  "Experience",
   "Skills",
+  "Foundation",
   "About",
   "Contact",
 ];

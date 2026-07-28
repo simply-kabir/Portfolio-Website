@@ -19,7 +19,7 @@ export function SkillInformation({ skill }: SkillInformationProps) {
       </div>
 
       {/* Section Heading */}
-      <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light tracking-tight text-white leading-[1.08] mb-10">
+      <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-light tracking-tight text-white leading-[1.08] mb-6 sm:mb-8">
         Foundation built <span className="text-white/40 italic font-serif font-normal">on</span>
       </h2>
 

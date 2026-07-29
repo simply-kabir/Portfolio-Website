@@ -7,15 +7,15 @@ export const SOCIALS: SocialLink[] = [
   },
   {
     name: "LinkedIn",
-    href: "#", // TODO: replace with your actual LinkedIn URL
+    href: "https://www.linkedin.com/in/kabir-bb2086406/", // TODO: replace with your actual LinkedIn URL
   },
   {
     name: "Instagram",
-    href: "#", // TODO: replace with https://instagram.com/<your-handle>
+    href: "https://instagram.com/___simply.kabir/", // TODO: replace with https://instagram.com/___simply.kabir/
   },
   {
     name: "Threads",
-    href: "#", // TODO: replace with https://threads.net/@<your-handle>
+    href: "https://threads.net/@___simply.kabir/", // TODO: replace with https://threads.net/@___simply.kabir/
   },
   {
     name: "Email",

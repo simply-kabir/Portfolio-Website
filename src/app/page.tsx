@@ -2,8 +2,7 @@ import Hero from "@/components/sections/hero/hero";
 import Projects from "@/components/sections/projects";
 import Skills from "@/components/sections/skills";
 import FoundationSection from "@/components/sections/foundation/FoundationSection";
-import Contact from "@/components/sections/contact";
-import Footer from "@/components/sections/footer";
+import ConnectSection from "@/components/sections/connect/ConnectSection";
 
 export default function Home() {
   return (
@@ -12,8 +11,7 @@ export default function Home() {
       <Projects />
       <Skills />
       <FoundationSection />
-      <Contact />
-      <Footer />
+      <ConnectSection />
     </main>
   );
 }

@@ -7,7 +7,7 @@ const SECTION_IDS = [
   "skills",
   "foundation",
   "about",
-  "contact",
+  "connect",
 ];
 
 export function useActiveSection() {

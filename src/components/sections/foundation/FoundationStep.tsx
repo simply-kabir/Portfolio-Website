@@ -75,12 +75,12 @@ export function FoundationStep({ item, isFirst, isLast }: Props) {
     <motion.div
       ref={ref}
       style={{ opacity, y, filter: blur }}
-      className={`relative pl-10 sm:pl-12 flex flex-col ${
+      className={`relative pl-10 sm:pl-12 flex flex-col justify-start pt-2 ${
         isFirst
-          ? "min-h-[45vh] justify-start pt-2"
+          ? "min-h-[25vh] md:min-h-[45vh] pb-8 md:pb-0"
           : isLast
-            ? "min-h-[30vh] justify-start pb-4"   /* Aligns exit bottom line with left column description */
-            : "min-h-[75vh] justify-center py-12"
+            ? "min-h-[25vh] md:min-h-[30vh] pb-4"
+            : "min-h-[30vh] md:min-h-[60vh] pb-10 md:pb-12"
       }`}
     >
       {/* ── Node dot (centered on the vertical line track) ── */}

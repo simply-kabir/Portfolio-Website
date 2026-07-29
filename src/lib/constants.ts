@@ -9,7 +9,7 @@ export const NAV_LINKS = [
   "Skills",
   "Foundation",
   "About",
-  "Contact",
+  "Connect",
 ];
 
 export const COLORS = {

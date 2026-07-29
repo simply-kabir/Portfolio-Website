@@ -16,7 +16,7 @@ export const NAVIGATION = [
     href: "#foundation",
   },
   {
-    label: "Contact",
-    href: "#contact",
+    label: "Connect",
+    href: "#connect",
   },
 ];

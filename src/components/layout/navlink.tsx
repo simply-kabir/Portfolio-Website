@@ -18,10 +18,10 @@ export default function NavLink({
     <Link
       href={href}
       className={cn(
-        "transition-all duration-300",
-        "text-sm",
+        "transition-all duration-300 whitespace-nowrap",
+        "text-xs sm:text-sm",
         active
-          ? "text-text-primary"
+          ? "text-text-primary font-medium"
           : "text-text-secondary hover:text-text-primary"
       )}
     >

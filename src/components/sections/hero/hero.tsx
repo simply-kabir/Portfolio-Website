@@ -35,7 +35,7 @@ export default function Hero() {
       className="relative w-full h-[165vh] lg:h-[165vh]"
     >
       {/* Anchor for nav's "About" link */}
-      <div id="about" className="absolute left-0 w-full" style={{ top: "115vh" }} />
+      <div id="about" className="absolute left-0 w-full" style={{ top: "65vh" }} />
 
       {/* Viewport-Pinned Container on Desktop, Fluid Auto-Expanding on Mobile */}
       <div className="sticky top-0 min-h-[100dvh] lg:h-screen w-full overflow-visible lg:overflow-hidden">

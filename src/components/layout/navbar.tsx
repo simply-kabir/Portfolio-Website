@@ -51,12 +51,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
+    <header className="fixed top-4 sm:top-6 left-1/2 z-50 -translate-x-1/2 w-[calc(100vw-1.5rem)] sm:w-auto max-w-max flex justify-center">
       <nav
         ref={navRef}
         className="
-          flex items-center gap-x-8
-          rounded-full px-8 py-3.5
+          flex items-center gap-x-3 sm:gap-x-6 md:gap-x-8
+          rounded-full px-3.5 sm:px-6 md:px-8 py-2.5 sm:py-3.5
           shadow-[0_24px_60px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.5),inset_0_-8px_20px_rgba(255,255,255,0.06),inset_0_0_0_1px_rgba(255,255,255,0.13)]
         "
         style={{

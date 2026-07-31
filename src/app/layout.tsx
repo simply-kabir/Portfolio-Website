@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Providers from "@/providers/providers";
+import GlassDebugToggle from "@/components/GlassDebugToggle";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +13,7 @@ const inter = Inter({
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
- style: ["normal", "italic"],
+  style: ["normal", "italic"],
   variable: "--font-serif-display",
 });
 
@@ -30,10 +30,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`} suppressHydrationWarning>
+        {/* Must set the flag BEFORE liquid-glass.js runs — plain script tags,
+            not next/script, so execution order is guaranteed */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__DISABLE_GLASS = localStorage.getItem('disableGlass') === 'true';`,
+          }}
+        />
+        <script src="/liquid-glass.js" />
+
         <Providers>
           <Navbar />
-        {children}
+          {children}
         </Providers>
+
+        {process.env.NEXT_PUBLIC_ENABLE_GLASS_DEBUG === 'true' && <GlassDebugToggle />}
       </body>
     </html>
   );

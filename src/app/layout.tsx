@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Providers from "@/providers/providers";
 import GlassDebugToggle from "@/components/GlassDebugToggle";
+import LongTaskLogger from "@/components/LongTaskLogger";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,8 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`} suppressHydrationWarning>
-        {/* Must set the flag BEFORE liquid-glass.js runs — plain script tags,
-            not next/script, so execution order is guaranteed */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.__DISABLE_GLASS = localStorage.getItem('disableGlass') === 'true';`,
@@ -44,7 +43,12 @@ export default function RootLayout({
           {children}
         </Providers>
 
-        {process.env.NEXT_PUBLIC_ENABLE_GLASS_DEBUG === 'true' && <GlassDebugToggle />}
+        {process.env.NEXT_PUBLIC_ENABLE_GLASS_DEBUG === 'true' && (
+          <>
+            <GlassDebugToggle />
+            <LongTaskLogger />
+          </>
+        )}
       </body>
     </html>
   );

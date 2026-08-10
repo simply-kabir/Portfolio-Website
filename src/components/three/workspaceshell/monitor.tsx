@@ -14,7 +14,7 @@ function cubicEase(t: number) {
 export default function Monitor({ progress = 0 }: { progress?: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const grainCanvasRef = useRef<HTMLCanvasElement | null>(null);
-
+  const hasSettledRef = useRef(false);
   // Initialize canvas and offscreen noise texture canvas
   const { screenTexture, canvas, grainCanvas } = useMemo(() => {
     if (typeof document === "undefined") {
@@ -52,10 +52,21 @@ export default function Monitor({ progress = 0 }: { progress?: number }) {
 
   useFrame(({ clock }) => {
     if (!canvasRef.current || !screenTexture) return;
+    const time = clock.getElapsedTime();
+    // Animation (logo strokes + text fade-in) is fully resolved by ~1.6s.
+    // After that, nothing on screen is actually changing frame-to-frame
+    // except two extremely subtle breathing/pulse effects — not worth
+    // a full canvas redraw + GPU re-upload 60 times a second forever.
+    const stillAnimating = time < 1.7;
+
+    if (!stillAnimating) {
+      if (hasSettledRef.current) return; // already drew the final static frame — do nothing
+      hasSettledRef.current = true;
+      // fall through once more to draw the final settled frame below
+    }
     const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
-    const time = clock.getElapsedTime();
     const width = 1024;
     const height = 604;
 

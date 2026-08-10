@@ -1,6 +1,5 @@
 "use client";
 
-import ScrollProvider from "./scroll-provider";
 import LenisProvider from "./lenisprovider";
 
 export default function Providers({
@@ -10,9 +9,7 @@ export default function Providers({
 }) {
   return (
     <LenisProvider>
-      <ScrollProvider>
         {children}
-      </ScrollProvider>
     </LenisProvider>
   );
 }

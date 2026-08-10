@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Providers from "@/providers/providers";
-import GlassDebugToggle from "@/components/GlassDebugToggle";
-import LongTaskLogger from "@/components/LongTaskLogger";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,24 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`} suppressHydrationWarning>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.__DISABLE_GLASS = localStorage.getItem('disableGlass') === 'true';`,
-          }}
-        />
-        <script src="/liquid-glass.js" />
-
         <Providers>
           <Navbar />
-          {children}
+        {children}
         </Providers>
-
-        {process.env.NEXT_PUBLIC_ENABLE_GLASS_DEBUG === 'true' && (
-          <>
-            <GlassDebugToggle />
-            <LongTaskLogger />
-          </>
-        )}
       </body>
     </html>
   );

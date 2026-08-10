@@ -14,7 +14,7 @@ const SceneCanvas = dynamic(() => import("@/components/three/scenecanvas"), {
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useDollyProgress(sectionRef);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);;
 
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 1024px)");
@@ -27,6 +27,7 @@ export default function Hero() {
 
   // Cross-fade opacity lerps smoothly between 0.55 and 0.75
   const aboutOpacity = Math.min(Math.max((progress - 0.55) / 0.20, 0), 1);
+  if (isDesktop === null) return null;
 
   return (
     <section

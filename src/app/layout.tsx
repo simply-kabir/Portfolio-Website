@@ -30,8 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`} suppressHydrationWarning>
+        <Navbar />
         <Providers>
-          <Navbar />
         {children}
         </Providers>
       </body>

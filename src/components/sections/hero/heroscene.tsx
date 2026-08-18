@@ -1,4 +1,8 @@
-import SceneCanvas from "@/components/three/scenecanvas";
+import dynamic from "next/dynamic";
+
+const SceneCanvas = dynamic(() => import("@/components/three/scenecanvas"), {
+  ssr: false,
+});
 
 export default function HeroScene() {
   return (

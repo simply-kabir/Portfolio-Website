@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import HeroBackground from "@/components/sections/hero/herobackground";
 import About from "@/components/sections/about";
 import ScreenOverlay from "@/components/ui/screen-overlay";
 import { useDollyProgress } from "@/hooks/use-dolly-progress";
+import { useIs3DCapable } from "@/hooks/use-is-3d-capable";
 
 const SceneCanvas = dynamic(() => import("@/components/three/scenecanvas"), {
   ssr: false,
@@ -14,20 +15,11 @@ const SceneCanvas = dynamic(() => import("@/components/three/scenecanvas"), {
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useDollyProgress(sectionRef);
-  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);;
-
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1024px)");
-    setIsDesktop(mql.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
+  const { is3DCapable, isEvaluated } = useIs3DCapable();
 
   // Cross-fade opacity lerps smoothly between 0.55 and 0.75
   const aboutOpacity = Math.min(Math.max((progress - 0.55) / 0.20, 0), 1);
-  if (isDesktop === null) return null;
+  if (!isEvaluated) return null;
 
   return (
     <section
@@ -43,7 +35,7 @@ export default function Hero() {
         {/* 3D Scene Background & Workstation Canvas */}
         <HeroBackground progress={progress} />
 
-        {isDesktop && (
+        {is3DCapable && (
           <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto hidden lg:block">
             <SceneCanvas progress={progress} />
           </div>
